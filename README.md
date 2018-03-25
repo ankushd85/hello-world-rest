@@ -43,6 +43,8 @@ It also features some addon bonus features like Calling an external API, Getting
   1. Open/Import project in your favorite Text Editor or IDE (Optional)
   2. Inside hello-world directory, go to src/main/resources and edit below properties in application.properties if required.
       1. server.port by default its 8090
+              server.port=8090
+
       2. proxy settings if you are behind proxy
 
               proxy-port=your-proxy-port
@@ -78,7 +80,7 @@ Post git clone mentioned in above step and modifying application.properties, run
 If you are passionate about containers and want to run an application as container on local host or any remote host follow
 below docker steps.
 
-  a. Build docker image. Execute below command in hello-world project root directory.(Don't miss "." in the end of docker command)
+  a. Build docker image. Execute below command in hello-world project root directory. (Don't miss "." in the end of docker command)
 
       docker build -t hello_world_rest .
 
@@ -156,3 +158,15 @@ Below users are present in Database already for testing.
   Get call to fetch JSON array with the first N Fibonacci numbers. Replace 8 in the end with number you want to fetch fibonacci array for.
 
     curl -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8090/myorg/mylob/helloworld/bonus/items/v1/fibonacci/8
+
+
+  #### 3. Creating And Detecting Deadlock
+
+  Post call to create 2 threads with race condition to demonstrate thread deadlock. Deadlock lasts for 10 seconds
+
+    curl -d'{}' -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://localhost:8090/myorg/mylob/helloworld/v1/deadlocks
+
+
+  Get call to detects current deadlock thread count and returns count in response
+
+    curl -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8090/myorg/mylob/helloworld/v1/deadlocks
